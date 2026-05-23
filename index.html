@@ -7,7 +7,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        /* Кастомные стили для плавных анимаций */
         body { background-color: #111111; color: #ffffff; font-family: 'Inter', sans-serif; }
         .fade-in { animation: fadeIn 0.8s ease-in-out; }
         @keyframes fadeIn {
@@ -19,7 +18,21 @@
 </head>
 <body class="antialiased">
 
-    <section class="min-h-screen flex flex-col justify-center items-center text-center px-4 py-20 relative overflow-hidden bg-gradient-to-b from-zinc-900 to-[#111111]">
+    <header class="w-full py-6 px-6 border-b border-zinc-800 bg-[#111111]/80 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="logo-omni.png" alt="Omni Agent Logo" class="h-8 w-auto object-contain onerror="this.style.display='none'">
+                <span class="text-xl font-bold tracking-tight">Omni Agent</span>
+            </div>
+            <div>
+                <a href="#audit" class="text-sm bg-zinc-800 border border-zinc-700 px-4 py-2 rounded hover:bg-zinc-700 transition-colors">
+                    Request Audit
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="min-h-[calc(screen-80px)] flex flex-col justify-center items-center text-center px-4 py-20 relative overflow-hidden bg-gradient-to-b from-zinc-900 to-[#111111]">
         <div class="max-w-4xl z-10 fade-in">
             <h1 class="text-5xl md:text-7xl font-bold mb-6 tracking-tight">Omni Agent – Enterprise-Grade</h1>
             <h2 class="text-2xl md:text-3xl text-gray-300 mb-6">AI Infrastructure. Deployed On-Premise.</h2>
@@ -182,14 +195,18 @@
     <footer class="py-16 text-center border-t border-zinc-800 bg-[#111111]">
         <h2 class="text-3xl md:text-4xl font-bold mb-6 max-w-2xl mx-auto">Ready to Transform Your Enterprise?</h2>
         <p class="text-gray-500 max-w-xl mx-auto mb-10">Connect with our experts to explore how Omni Agent can drive unparalleled efficiency and sovereignty in your operations.</p>
+        
+        <div class="flex flex-col items-center justify-center gap-2 mb-6 select-none">
+            <img src="logo-tmsoft.png" alt="Tmsoft Logo" class="h-6 w-auto object-contain mb-1" onerror="this.style.display='none'">
+            <span class="text-xs font-semibold tracking-widest text-zinc-500 uppercase">Powered by <span class="text-zinc-300 font-bold">Tmsoft</span></span>
+        </div>
+
         <p class="text-sm text-zinc-600">© 2026 Omni Agent Infrastructure. All rights reserved.</p>
     </footer>
 
     <script>
-        // Инициализация SVG иконок Lucide
         lucide.createIcons();
 
-        // Логика отправки формы без перезагрузки (AJAX)
         const form = document.getElementById('auditForm');
         const submitBtn = document.getElementById('submitBtn');
         const successMessage = document.getElementById('successMessage');
@@ -198,7 +215,6 @@
         form.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Меняем текст кнопки на "Отправка..."
             const originalBtnText = submitBtn.innerHTML;
             submitBtn.innerHTML = '<span class="animate-pulse">Processing...</span>';
             submitBtn.disabled = true;
@@ -213,7 +229,6 @@
             .then(async (response) => {
                 let json = await response.json();
                 if (response.status == 200) {
-                    // Успех! Прячем форму, показываем красивое сообщение
                     form.classList.add('hidden-form');
                     successMessage.classList.remove('hidden-form');
                 } else {
